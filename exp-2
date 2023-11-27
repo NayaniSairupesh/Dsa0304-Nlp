@@ -1,0 +1,34 @@
+def fsa_accepts(input_string):
+    
+    q0, q1, q2 = 'q0', 'q1', 'q2'
+
+   
+    transitions = {
+        q0: { '0': q1, '1': q2 },
+        q1: { '0': q0, '1': q2 },
+        q2: { '0': q1, '1': q0 }
+    }
+
+    
+    current_state = q0
+
+    
+    for symbol in input_string:
+        if symbol in transitions[current_state]:
+            current_state = transitions[current_state][symbol]
+        else:
+            
+            return False
+
+    
+    return current_state == q0
+
+
+user_input = input("Enter a string of 0s and 1s: ")
+
+
+if fsa_accepts(user_input):
+    print("The string is accepted by the finite state automaton.")
+else:
+    print("The string is not accepted by the finite state automaton.")
+
