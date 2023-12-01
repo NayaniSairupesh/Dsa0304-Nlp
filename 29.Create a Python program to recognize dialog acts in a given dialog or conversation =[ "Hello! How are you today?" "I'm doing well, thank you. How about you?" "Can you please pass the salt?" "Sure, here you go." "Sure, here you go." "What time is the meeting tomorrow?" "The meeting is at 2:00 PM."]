@@ -1,0 +1,10 @@
+import spacy
+def recognize_dialog_acts(dialog):
+    nlp = spacy.load("en_core_web_sm")
+    dialog_acts = []
+    for utterance in dialog:
+        doc = nlp(utterance)
+        if any(token.text.lower() in ["hello", "hi", "hey"] for token in doc):
+            dialog_acts.append(("Greeting", utterance))
+        elif any(token.text.lower() in ["how", "doing"] for token in doc) and "you" in [token.text.lower() for token in doc]:
+            dialog_acts.append(("Inquiry - Well-being", utterance))
