@@ -1,0 +1,11 @@
+import spacy
+
+def perform_ner(text):
+    # Load spaCy English language model
+    nlp = spacy.load("en_core_web_sm")
+
+    # Process the input text
+    doc = nlp(text)
+
+    # Extract named entities
+    entities = [(entity.text, entity.label_) for entity in doc.ents]
